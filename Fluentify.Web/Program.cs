@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.RegisterCoreConfiguration(builder.Configuration);
 builder.Services.RegisterCoreDependencies();
 
+var cs = builder.Configuration.GetConnectionString("Dev");
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddRazorPages();
