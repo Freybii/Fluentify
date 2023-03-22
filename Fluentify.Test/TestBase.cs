@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Fluentify.Core;
+using Fluentify.Database;
 
 namespace Fluentify.Test
 {
@@ -25,6 +26,7 @@ namespace Fluentify.Test
             services.AddLogging((config) => config.AddDebug());
             services.RegisterCoreDependencies();
             services.RegisterCoreConfiguration(configuration);
+            services.RegisterDatabaseDependencies(configuration);
 
             ServiceProvider = services.BuildServiceProvider();
             Logger = ServiceProvider.GetRequiredService<ILogger<TestBase>>();

@@ -1,11 +1,13 @@
 using Fluentify.Core;
+using Fluentify.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.RegisterCoreConfiguration(builder.Configuration);
 builder.Services.RegisterCoreDependencies();
+builder.Services.RegisterDatabaseDependencies(builder.Configuration);
 
-var cs = builder.Configuration.GetConnectionString("Dev");
+var cs = builder.Configuration.GetConnectionString("StoreDatabase");
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddRazorPages();

@@ -6,9 +6,8 @@ namespace Fluentify.Models.Database.Tables
     {
         public string? Nickname { get; set; }
         public string? Email { get; set;}
-        public decimal? PhoneNumber { get; set; }
         public string? Password { get; set; }
-        public string? RegDate { get; set; }
+        public DateTime? RegDate { get; set; }
 
     }
 }

@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Fluentify.Core\Fluentify.Core.csproj" />
+    <ProjectReference Include="..\Fluentify.Database\Fluentify.Database.csproj" />
     <ProjectReference Include="..\Fluentify.Models\Fluentify.Models.csproj" />
     <ProjectReference Include="..\Fluentify.Web\Fluentify.Web.csproj" />
   </ItemGroup>

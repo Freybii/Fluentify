@@ -13,7 +13,15 @@ namespace Fluentify.Database
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {
             options.UseLazyLoadingProxies();
-            options.UseSqlServer();
+            options.UseSqlServer("Server=tcp:fluentifyserv.database.windows.net,1433;Initial Catalog=Fluentifydb;Persist Security Info=False;User ID=FluentAdmin;Password=12Lolokokopo12;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Users>()
+            .Property(u => u.RegDate)
+            .HasColumnType("date")
+            .HasDefaultValueSql("GETDATE()");
         }
 
     }
