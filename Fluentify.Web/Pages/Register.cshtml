@@ -9,54 +9,87 @@
         color: red;
         font-size: 10px;
     }
-    .form-group{
-        margin-top: 20px;
+
+    h2 {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 20px;
     }
+
+    .form-container {
+        max-width: 500px;
+        margin: auto;
+        padding: 30px;
+        border-radius: 10px;
+        background-color: #f8f8f8;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        font-size: 14px;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        border: none;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        font-size: 14px;
+    }
+
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+        }
+
+    .form-submit {
+        background-color: #4CAF50;
+        color: #fff;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+
+        .form-submit:hover {
+            background-color: #3e8e41;
+        }
 </style>
 
-<br />
-<h2 class="text-center"><b>Create your profile</b></h2>
-<br />
+<h2>Create your profile</h2>
 
-<div class="container d-flex justify-content-center align-self-center">
+<div class="form-container">
     <form method="post">
-        <div class="form-group row">
-            <div class="col-12">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">@@</div>
-                    </div>
-                    <input asp-for="Users.Nickname" class="form-control" placeholder="Nickname" />
-                </div>
-                <span asp-validation-for="Users.Nickname" class="error"></span>
-            </div>
+        <div class="form-group">
+            <label for="nickname" class="form-label">Nickname</label>
+            <input asp-for="Users.Nickname" id="nickname" class="form-control" placeholder="Enter your nickname" />
+            <span asp-validation-for="Users.Nickname" class="error"></span>
         </div>
 
-        <div class="form-group row">
-            <div class="col-12">
-                <input asp-for="Users.Email" type="email" class="form-control" placeholder="example@gmail.com"/>
-                <span asp-validation-for="Users.Email" class="error"></span>
-            </div>
+        <div class="form-group">
+            <label for="email" class="form-label">Email address</label>
+            <input asp-for="Users.Email" type="email" id="email" class="form-control" placeholder="Enter your email" />
+            <span asp-validation-for="Users.Email" class="error"></span>
         </div>
 
-        <div class="form-group row">
-            <div class="col-12">
-                <input asp-for="Users.Password" type="password" class="form-control" placeholder="Password">
-                <span asp-validation-for="Users.Password" class="error"></span>
-            </div>
+        <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input asp-for="Users.Password" type="password" id="password" class="form-control" placeholder="Enter your password" />
+            <span asp-validation-for="Users.Password" class="error"></span>
         </div>
 
-        <div class="form-group row">
-            <div class="col-12">
-                <input asp-for="Users.ConfirmPassword" type="password" class="form-control" placeholder="Confirm password">
-                <span asp-validation-for="Users.ConfirmPassword" class="error"></span>
-            </div>
+        <div class="form-group">
+            <label for="confirm-password" class="form-label">Confirm password</label>
+            <input asp-for="Users.ConfirmPassword" type="password" id="confirm-password" class="form-control" placeholder="Confirm your password" />
+            <span asp-validation-for="Users.ConfirmPassword" class="error"></span>
         </div>
 
-        <div class="form-group row">
-            <div class="col-12">
-                <input type="submit" class="btn btn-dark rounded-pill form-control" asp-page-handler="Submit" />
-            </div>
+        <div class="form-group">
+            <button type="submit" class="form-submit btn rounded-pill">Submit</button>
         </div>
     </form>
 </div>
