@@ -82,33 +82,18 @@ Telegram : https://t.me/Hope3_7
 * Login Page  - **☑**
 * Restart password Page - **☑**
 
-### Freelancer/Employers frontend:
+### User frontend:
 
-* Freelancer Page - **▢**
-* Employers Page  - **▢**
-* Choose Freelancer Page - **☑**
-* Choose Employers Page - **☑**
-* Kabinet - **▢**
+* Profile Page - **▢**
 
 ### API :
 
 * Add Google authorization - **▢**
-* Add Chat API - **▢**
 * Add Restore password API- **▢**
-
-
-### Freelancer/Employers backend:
-
-* 
-* 
-* 
-* 
 
 ### Registration/Login backend :
 
 * ORM - **▢**
-
-
 
 ## Tech Stack
 
