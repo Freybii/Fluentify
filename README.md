@@ -129,5 +129,8 @@ What was done
 Student : Havrylyak Ruslan
 GitHub: https://github.com/Gavruk12345/Havrilyak.University.WorkWise.git
 
+Link Pull request 
+https://github.com/Freybii/Fluentify/pull/1
+
 
 
