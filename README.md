@@ -121,5 +121,13 @@ Application Insights
 
 ## API Reference
 
+## Lab 3 
+What was done
+1. A front-end part was added to the main page of the site, with a beautiful design
+2. The front-end part in CSS on the registration site was improved
+
+Student : Havrylyak Ruslan
+GitHub: https://github.com/Gavruk12345/Havrilyak.University.WorkWise.git
+
 
 
