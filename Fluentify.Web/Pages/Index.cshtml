@@ -4,18 +4,146 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>@ViewData["Title"] - Dzirba.Fluentify</title>
+		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="~/Fluentify.Web.styles.css" asp-append-version="true" />
+		<link rel="stylesheet" href="~/css/HomePage.css" asp-append-version="true" />
+	</head>
+	<body>
 
-    <p>
-        Dear students, when working on projects in a solution, it's important to make sure that all project names and namespaces are properly renamed to reflect the content of your work.
-        Please ensure that there are no example project names left in your solution.
-        To simplify this process, I recommend using the "rename solution" and global search features available in Visual Studio.
-    </p>
-        
-    <p>
-        Thank you for taking the time to ensure that your solution is properly named and organized. I wish you all the best with your coding endeavors, and happy coding!
-    </p>
+  
+    <section class="home" id="home">
+        <div class="home-content">
+            <div class="text">
+                
+                <div class="text-two">We are languages school</div>
+                <div class="text-three">English, Spanish, German, French and many others</div>
+            </div>
+            <div class="button">
+                <button>More</button>
+            </div>
+        </div>
+    </section>
 
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    
+
+ 
+    <section class="skills" id="skills">
+        <div class="content">
+            <div class="title"><span>Our Advantages</span></div>
+            <div class="skills-details">
+                <div class="text">
+                    <div class="topic">About learning a foreign language</div>
+                    
+                       <p> Highly qualified teachers who will help you unlock your potential in language learning. Modern teaching methods and access to a variety of resources that can help improve your language skills. The opportunity to participate in various international projects and exchanges, which will allow you to practice the language and develop intercultural skills. Preparation for international exams and certification that ensures recognition of your level of knowledge languages around the world. Expanding opportunities for further education and career development, as English is the language of international communication and business.</p>
+                    <div class="experience">
+                        <div class="num">5</div>
+                        <div class="exp">Years Of <br> Experience</div>
+                    </div>
+                </div>
+                <div class="boxes">
+                    <div class="box">
+                    <div class="topic">Assimilation</div>
+                        <div class="per">100%</div>
+                    </div>
+                    <div class="box">
+                    <div class="topic">You will talk</div>
+                        <div class="per">100%</div>
+                    </div>
+                    <div class="box">
+                    <div class="topic">Confidence</div>
+                        <div class="per">100%</div>
+                    </div>
+                    <div class="box">
+                    <div class="topic">Qualities</div>
+                        <div class="per">100%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+  
+    <section class="services" id="services">
+        <div class="content">
+            <div class="title"><span>Our training programs</span></div>
+            <div class="boxes">
+                <div class="box">
+                    
+                    <div class="topic">English</div>
+                    <p>English is an international language of communication and science, learning it can open doors to cultures and opportunities around the world.</p>
+                </div>
+                <div class="box">
+                    
+                        
+                    <div class="topic">French</div>
+                    <p>French is the language of art and culture, and is one of the official languages of the European Union.</p>
+                </div>
+                <div class="box">
+                    
+                    <div class="topic">Spanish</div>
+                    <p>Spanish is one of the most widely spoken languages in the world, learning it can help you interact with people from different countries and cultures.</p>
+                </div>
+                <div class="box">
+                    
+                    <div class="topic"> Chinese</div>
+                    <p>Chinese is the language with the largest number of speakers in the world, learning it can help you understand the culture and economic potential of China.</p>
+                </div>
+                <div class="box">
+                    
+                    <div class="topic">German</div>
+                    <p>German is the language of business and science, learning it can help you understand technical and scientific content, as well as open the door to the job market in Germany and Austria.</p>
+                </div>
+                <div class="box">
+                    <div class="topic">Others</div>
+                    <p>And more others language</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    <section class="about" id="about">
+        <div class="content">
+            <div class="title"><span>About Us</span></div>
+            <div class="about-details">
+                <div class="left">
+                    <img src="image/about.jpg" alt="">
+                </div>
+                <div class="right">
+                    <div class="topic">Designing Is My Passion</div>
+                    <p>A language school is an educational institution where students can learn to speak, read and write in a foreign language. The school usually has experienced teachers who use different methods and materials for teaching. Language schools can offer different programs, from intensive to more relaxed, and can organize international exchanges and projects for students. Studying at a language school helps you improve your language skills, develop intercultural skills, and prepare for international exams and certification..</p>
+                    <div class="button">
+                        <button>More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+    <section class="contact" id="contact">
+        <div class="content">
+            <div class="title"><span>Contact Me</span></div>
+            <div class="text">
+                <div class="topic">Have Any Question?</div>
+                <p>Contact us and we will answer your favorite questions</p>
+                <div class="button">
+                    <button>Let's Chat</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+    
+
+    <script src="script.js"></script>
+	
+
+	</body>
+</html>
