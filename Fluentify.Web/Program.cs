@@ -19,7 +19,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
 
 // Add services to the container.
 
-
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["ApplicationInsights"]);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -30,6 +30,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireUppercase = false;
 });
+builder.Services.AddApplicationInsightsTelemetry(builder.Configuration["APPLICATIONINSIGHTS_CONNECTION_STRING"]);
 
 var app = builder.Build();
 

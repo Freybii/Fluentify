@@ -5,9 +5,11 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>a2356a3f-e5e5-4965-8f73-a388fe6c2497</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/d6567451-0b44-4cfc-ae75-50c9c52ffa78/resourceGroups/FluentifyGroup/providers/microsoft.insights/components/Fluentify</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="7.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.5" />
