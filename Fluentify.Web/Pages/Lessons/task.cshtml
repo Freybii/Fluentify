@@ -2,10 +2,12 @@
 @model Fluentify.Web.Pages.Lessons.taskModel
 <div class="container text-center">
     <h1 class="mb-5">Unit @Model.Task.UnitId Task @Model.Task.TaskId</h1>
-    <div class="">
-    <h3 class="mb-5">@Model.Task.Text</h3>
-        <h3 id="answer"></h3>
+    <div class="d-flex justify-content-center">
+        <h3 id="nontrtext" class="mb-5">
+            <img id="LoadVoice" class="me-2 d-block " style="height: 28px; width: 28px; float: left;" src="~/image/icons8-speaker-50.png" />@Model.Task.Text
+        </h3>
     </div>
+    <h3 id="answer"></h3>
     @foreach (var word in Model.Task.Words.Split(null))
     {
         <button class="btn btn-success btn-lg rounded-pill mt-5 word-c">@word</button>
@@ -33,6 +35,17 @@
             $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
                 $("#success-alert").slideUp(500);
             });
+            // Add the following code to update the Experience column
+            $.ajax({
+                url: "/api/updateExperience",  // Replace with the correct URL for your API endpoint
+                type: "POST",
+                success: function (response) {
+                    console.log("Experience updated successfully!");
+                },
+                error: function (error) {
+                    console.error("Error updating Experience:", error);
+                }
+            });
             let numtask = @Model.Task.Id + 1 + ''
             setTimeout(() => { window.location.href = numtask; }, 2000);
         } else {
@@ -59,4 +72,32 @@
             }
             console.log(index);
     })});
+
+    // Function to create an audio element and load the synthesized audio
+    function loadAudio(audioUrl) {
+        const audio = new Audio(audioUrl);
+        return audio;
+    }
+
+    // Handle click event on the nontrtext element
+    document.getElementById("LoadVoice").addEventListener('click', function () {
+        document.getElementById("LoadVoice").src = "/image/icons8-speaker.gif";
+        setTimeout(function () { document.getElementById("LoadVoice").src = "/image/icons8-speaker-50.png"; }, 2000);
+        //assuming thunder.gif animation length is 3 seconds
+        const text = document.getElementById("nontrtext").textContent;
+        // Make an AJAX request to the server to synthesize the text to speech
+        $.ajax({
+            url: "/api/speech/synthesize",
+            type: "POST",
+            data: JSON.stringify({ text: text }),
+            contentType: "application/json",
+            success: function (response) {
+                // Load the synthesized audio
+                const audio = loadAudio(response.audioUrl);
+            },
+            error: function () {
+                // Handle error
+            }
+        });
+    });
 </script>

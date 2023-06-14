@@ -22,4 +22,6 @@ public class ApplicationUser : IdentityUser
     [PersonalData]
     [Column(TypeName = "nvarchar(100)")]
     public string? Avatar { get; set; }
+
+    public int? Experience { get; set; }
 }
