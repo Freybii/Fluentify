@@ -1,0 +1,60 @@
+﻿@model Fluentify.Web.Areas.Identity.Data.FluentifyTask
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>FluentifyTask</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="TaskId" class="control-label"></label>
+                <input asp-for="TaskId" class="form-control" />
+                <span asp-validation-for="TaskId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UnitId" class="control-label"></label>
+                <input asp-for="UnitId" class="form-control" />
+                <span asp-validation-for="UnitId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="audio_path" class="control-label"></label>
+                <input asp-for="audio_path" class="form-control" />
+                <span asp-validation-for="audio_path" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label"></label>
+                <input asp-for="Text" class="form-control" />
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Words" class="control-label"></label>
+                <input asp-for="Words" class="form-control" />
+                <span asp-validation-for="Words" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorrectWords" class="control-label"></label>
+                <input asp-for="CorrectWords" class="form-control" />
+                <span asp-validation-for="CorrectWords" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,7 +1,7 @@
 ﻿@page
-@model IndexModel
+@model Fluentify.Web.Pages.StudyModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Study";
 }
 @using Microsoft.AspNetCore.Identity
 @using Fluentify.Web.Areas.Identity.Data
@@ -10,21 +10,21 @@
 @inject UserManager<ApplicationUser> UserManager
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark position-fixed mt-0" style="width: 280px;  height: 83%;">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark position-fixed" style="width: 280px; height: 83%;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
             <span class="fs-4">Menu</span>
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white active" aria-current="page">
+            <li class="nav-item text-white">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white" aria-current="page">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="bootstrap-icons.svg#house-door"></use></svg>
                     Home
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="Study" class="nav-link text-white" aria-current="page">
+            <li class="nav-item text-white">
+               <a href="Study" class="nav-link active" aria-current="page">
                     <svg class="bi me-2" width="16" height="16"><use xlink:href="bootstrap-icons.svg#house-door"></use></svg>
                     Study
                 </a>
@@ -48,21 +48,39 @@
             </ul>
         </div>
     </div>
+    <div class="container d-flex align-items-center justify-content-center">
+        <div class="row justify-content-center  mt-3 ms-5 text-center">
+            @foreach (var task in Model.Tasks)
+            {
+                if (@task.TaskId == 1)
+                {
+                    <h1 class="text-center mt-5">Unit @task.UnitId</h1>
+                }
+                <div class="col-auto text-center">
+                    <a href="task/@task.Id">
+                        <button class="btn btn-primary">Task @task.TaskId</button>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <script>
+        // Fetch tasks using AJAX
+        $(document).ready(function () {
+            $.ajax({
+                url: "/api/FluentifyTasks",
+                type: "GET",
+                success: function (data) {
+                    var tasks = data;
+                    // Assign the tasks to the Razor page model
+        @Html.Raw("Model.Tasks = tasks;");
+                }
+            });
+        });
+    </script>
 }
 else
 {
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>
-        Dear students, when working on projects in a solution, it's important to make sure that all project names and namespaces are properly renamed to reflect the content of your work.
-        Please ensure that there are no example project names left in your solution.
-        To simplify this process, I recommend using the "rename solution" and global search features available in Visual Studio.
-    </p>
-        
-    <p>
-        Thank you for taking the time to ensure that your solution is properly named and organized. I wish you all the best with your coding endeavors, and happy coding!
-    </p>
-
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <h1>Please Register or Login into Fluentify</h1>
 }

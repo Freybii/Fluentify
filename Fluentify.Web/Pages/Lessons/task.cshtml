@@ -1,0 +1,62 @@
+﻿@page "/task/{id}"
+@model Fluentify.Web.Pages.Lessons.taskModel
+<div class="container text-center">
+    <h1 class="mb-5">Unit @Model.Task.UnitId Task @Model.Task.TaskId</h1>
+    <div class="">
+    <h3 class="mb-5">@Model.Task.Text</h3>
+        <h3 id="answer"></h3>
+    </div>
+    @foreach (var word in Model.Task.Words.Split(null))
+    {
+        <button class="btn btn-success btn-lg rounded-pill mt-5 word-c">@word</button>
+    }
+</div>
+<div class="container d-flex justify-content-end text-right h-100">
+    <div class="col d-flex justify-content-end align-items-end">
+        <button id="check" class="btn btn-primary btn-lg rounded-pill mb-0 me-0">Check</button>
+    </div>
+</div>
+<div class="alert alert-success text-center" id="success-alert">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>Success!</strong> Great job buddy.
+</div>
+<div class="alert alert-danger text-center" id="danger-alert">
+    <a href="#" class="close" data-dismiss="alert">&times;</a>
+    <strong>Mistake!</strong> Try again.
+</div>
+<script>
+    $("#success-alert").hide();
+    $("#danger-alert").hide();
+
+    document.getElementById("check").addEventListener('click', function onClickCheck() {
+        if (document.getElementById("answer").innerHTML.slice(0, -1) == "@Model.Task.CorrectWords") {
+            $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
+                $("#success-alert").slideUp(500);
+            });
+            let numtask = @Model.Task.Id + 1 + ''
+            setTimeout(() => { window.location.href = numtask; }, 2000);
+        } else {
+            $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
+                $("#danger-alert").slideUp(500);
+            });
+        }
+    });
+
+    const btn = document.getElementsByClassName("word-c");
+    [].forEach.call(btn, function (el) {
+    let index = 0;
+
+        const colors = ['grey', '#1ea265'];
+
+    el.addEventListener('click', function onClick() {
+            el.style.backgroundColor = colors[index];
+            el.style.color = 'white';
+            index = index >= colors.length - 1 ? 0 : index + 1;
+            if (index == 1){
+                document.getElementById("answer").innerHTML += el.innerHTML + " ";
+            } else {
+                document.getElementById("answer").innerHTML = document.getElementById("answer").innerHTML.replace(el.innerHTML + " ", '');
+            }
+            console.log(index);
+    })});
+</script>
