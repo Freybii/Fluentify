@@ -2,10 +2,11 @@
 @model Fluentify.Web.Pages.Lessons.taskModel
 <div class="container text-center">
     <h1 class="mb-5">Unit @Model.Task.UnitId Task @Model.Task.TaskId</h1>
+
     <div class="d-flex justify-content-center">
         <h3 id="nontrtext" class="mb-5">
             <img id="LoadVoice" class="me-2 d-block " style="height: 28px; width: 28px; float: left;" src="~/image/icons8-speaker-50.png" />@Model.Task.Text
-        </h3>
+        </h3> 
     </div>
     <h3 id="answer"></h3>
     @foreach (var word in Model.Task.Words.Split(null))
@@ -86,6 +87,7 @@
         //assuming thunder.gif animation length is 3 seconds
         const text = document.getElementById("nontrtext").textContent;
         // Make an AJAX request to the server to synthesize the text to speech
+        event.preventDefault();
         $.ajax({
             url: "/api/speech/synthesize",
             type: "POST",
@@ -93,7 +95,7 @@
             contentType: "application/json",
             success: function (response) {
                 // Load the synthesized audio
-                const audio = loadAudio(response.audioUrl);
+                //const audio = loadAudio(response.audioUrl);
             },
             error: function () {
                 // Handle error
