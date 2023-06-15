@@ -59,8 +59,8 @@ Telegram : https://t.me/Hope3_7
 ### Database:
 
 * Create Azure database - **☑**
-* Create a table in SQL server for Login/Registration - **☑**
-* Create a table in SQL server for Employers/Freelancer - **☑**
+* Create a table in SQL server for User - **☑**
+* Create a table in SQL server for Task - **☑**
 
 
 ### Azure:
@@ -68,19 +68,20 @@ Telegram : https://t.me/Hope3_7
 * Registration - **☑**
 * Project deploy - **☑**
 * Azure database - **☑**
-* CI/CD - **▢**
+* Azure Text-To-Speech Service - **☑**
+* CI/CD - **☑**
 
 
 ### Index frontend :
 * Home Page - **☑**
-* Choose Categori Page - **☑** 
+* Study Page - **☑** 
 * About Page - **☑**
 
 ### Registration/Login frontend :
 
 * Registration Page - **☑**
 * Login Page  - **☑**
-* Restart password Page - **☑**
+* Restore password Page - **☑**
 
 ### User frontend:
 
@@ -88,12 +89,12 @@ Telegram : https://t.me/Hope3_7
 
 ### API :
 
-* Add Google authorization - **▢**
-* Add Restore password API- **▢**
+* Add Google authorization - **☑**
+* Add Text-To-Speech API- **☑**
 
 ### Registration/Login backend :
 
-* ORM - **▢**
+* ORM - **☑**
 
 ## Tech Stack
 
