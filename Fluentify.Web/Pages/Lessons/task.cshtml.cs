@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.CognitiveServices.Speech;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fluentify.Web.Pages.Lessons
 {
@@ -33,7 +34,7 @@ namespace Fluentify.Web.Pages.Lessons
                     return NotFound();
 
                 // Perform text-to-speech conversion
-                await SynthesizeTextToSpeech(Task.Text);
+                //await SynthesizeTextToSpeech(Task.Text);
 
                 return Page();
             }
@@ -42,6 +43,8 @@ namespace Fluentify.Web.Pages.Lessons
                 return StatusCode(500, ex.Message);
             }
         }
+
+        
 
         private async Task SynthesizeTextToSpeech(string text)
         {
@@ -61,4 +64,4 @@ namespace Fluentify.Web.Pages.Lessons
             }
         }
     }
-}
+    }

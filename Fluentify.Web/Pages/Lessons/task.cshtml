@@ -1,6 +1,9 @@
 ﻿@page "/task/{id}"
 @model Fluentify.Web.Pages.Lessons.taskModel
+@using Microsoft.AspNetCore.Identity
+@using System.Security.Claims
 <div class="container text-center">
+    <div class="text-center bg-white mt-5 p-3 rounded-3">
     <h1 class="mb-5">Unit @Model.Task.UnitId Task @Model.Task.TaskId</h1>
 
     <div class="d-flex justify-content-center">
@@ -13,12 +16,12 @@
     {
         <button class="btn btn-success btn-lg rounded-pill mt-5 word-c">@word</button>
     }
-</div>
-<div class="container d-flex justify-content-end text-right h-100">
-    <div class="col d-flex justify-content-end align-items-end">
-        <button id="check" class="btn btn-primary btn-lg rounded-pill mb-0 me-0">Check</button>
+        <div class="col d-flex justify-content-end align-items-end">
+            <button id="check" class="btn btn-primary btn-lg rounded-pill mb-0 me-0">Check</button>
+        </div>
     </div>
 </div>
+
 <div class="alert alert-success text-center" id="success-alert">
     <a href="#" class="close" data-dismiss="alert">&times;</a>
     <strong>Success!</strong> Great job buddy.
@@ -30,25 +33,50 @@
 <script>
     $("#success-alert").hide();
     $("#danger-alert").hide();
+    $.ajax({
+        url: "/api/speech/synthesize",
+        type: "POST",
+        data: JSON.stringify({ text: "@Model.Task.Text" }),
+        contentType: "application/json",
+        success: function (response) {
+        },
+        error: function () {
+            // Handle error
+        }
+    });
 
     document.getElementById("check").addEventListener('click', function onClickCheck() {
         if (document.getElementById("answer").innerHTML.slice(0, -1) == "@Model.Task.CorrectWords") {
             $("#success-alert").fadeTo(2000, 500).slideUp(500, function(){
                 $("#success-alert").slideUp(500);
             });
-            // Add the following code to update the Experience column
             $.ajax({
-                url: "/api/updateExperience",  // Replace with the correct URL for your API endpoint
-                type: "POST",
+                url: "/api/exp?userId=" + encodeURIComponent("@User.FindFirstValue(ClaimTypes.NameIdentifier)"),
+                type: "GET",
                 success: function (response) {
-                    console.log("Experience updated successfully!");
+                    if (isNaN(response)){
+                        response = response || 0
+                    }
+                    if ((response+100) / 100 == ((@Model.Task.UnitId-1)*10)+@Model.Task.TaskId) {
+                        $.ajax({
+                            url: "/api/exp",
+                            type: "POST",
+                            success: function (response) {
+                            },
+                            error: function () {
+                            }
+                        });
+                    }
                 },
-                error: function (error) {
-                    console.error("Error updating Experience:", error);
+                error: function () {
+                    // Handle error
                 }
             });
+
             let numtask = @Model.Task.Id + 1 + ''
-            setTimeout(() => { window.location.href = numtask; }, 2000);
+            setTimeout(console.log(numtask), 2000);
+            window.location.href = numtask
+           
         } else {
             $("#danger-alert").fadeTo(2000, 500).slideUp(500, function () {
                 $("#danger-alert").slideUp(500);
@@ -73,16 +101,15 @@
             }
             console.log(index);
     })});
-
-    function loadAudio(audioUrl) {
-        const audio = new Audio(audioUrl);
-        return audio;
-    }
-
     // Handle click event on the nontrtext element
     document.getElementById("LoadVoice").addEventListener('click', function () {
+        document.getElementById("LoadVoice").style.pointerEvents = 'none'
         document.getElementById("LoadVoice").src = "/image/icons8-speaker.gif";
-        setTimeout(function () { document.getElementById("LoadVoice").src = "/image/icons8-speaker-50.png"; }, 2000);
+        setTimeout(function () { 
+            document.getElementById("LoadVoice").src = "/image/icons8-speaker-50.png";
+        document.getElementById("LoadVoice").style.pointerEvents = null
+
+        }, 2000);
         //assuming thunder.gif animation length is 3 seconds
         const text = document.getElementById("nontrtext").textContent;
         // Make an AJAX request to the server to synthesize the text to speech
@@ -93,8 +120,6 @@
             data: JSON.stringify({ text: text }),
             contentType: "application/json",
             success: function (response) {
-                // Load the synthesized audio
-                //const audio = loadAudio(response.audioUrl);
             },
             error: function () {
                 // Handle error

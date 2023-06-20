@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Fluentify.Web.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/exp")]
     public class ExperienceController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -28,5 +28,15 @@ namespace Fluentify.Web.Controllers
 
             return Ok();
         }
+        [HttpGet]
+        public async Task<IActionResult> GetUserExperience([FromQuery] string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                return NotFound();
+
+            return Ok(user.Experience);
+        }
     }
+
 }

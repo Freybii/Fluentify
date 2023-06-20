@@ -9,19 +9,23 @@
     <link rel="stylesheet" href="~/AuthSystem.styles.css" asp-append-version="true" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Your+Desired+Font&display=swap" rel="stylesheet">
+    <link href="/css/Index.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
-        .navbar-brand {
-            font-family: 'Your Desired Font', sans-serif;
+        .vertical-center {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
         }
     </style>
 </head>
-
-<body>
+<body style="background-image: url('/image/stars.svg'); background-color: #235390;">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white text-white border-bottom box-shadow mb-3">
+        <nav style="background-color: #235390;" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light text-white box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand text-success" asp-area="" asp-controller="Home" asp-action="Index">Fluentify</a>
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/image/logo.png" alt="Fluentify" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -38,9 +42,9 @@
         </main>
     </div>
 
-    <footer class=" footer text-muted" style="position: absolute; bottom: 15px; margin-left: 300px;">
-        <div class="container">
-            &copy; 2023 - Dzirba Bohdan - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a> - <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+    <footer class="footer text-muted w-100" style="position: absolute; bottom: 0; height: 11%; background-color: #0a4a82;">
+        <div class="container text-center vertical-center text-white m-auto">
+            <h4>&copy; 2023 - Dzirba Bohdan - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy Policy</a> - <a asp-area="" asp-controller="Home" asp-action="About">About</a></h4>
         </div>
     </footer>
 

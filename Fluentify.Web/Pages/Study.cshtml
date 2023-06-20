@@ -5,62 +5,71 @@
 }
 @using Microsoft.AspNetCore.Identity
 @using Fluentify.Web.Areas.Identity.Data
-
+@using System.Security.Claims
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark position-fixed" style="width: 280px; height: 91%;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white position-fixed" style="width: 280px; height: 91%;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="~/image/Icons/menu.svg" width="40" height="32"/>
             <span class="fs-4">Menu</span>
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item text-white">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white" aria-current="page">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="bootstrap-icons.svg#house-door"></use></svg>
+            <li class="nav-item text-dark">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-dark" aria-current="page">
+                    <img src="~/image/Icons/house.svg" width="16" height="16"/>
                     Home
                 </a>
             </li>
-            <li class="nav-item text-white">
+            <li class="nav-item text-dark">
                <a href="Study" class="nav-link active" aria-current="page">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="bootstrap-icons.svg#house-door"></use></svg>
+                    <img src="~/image/Icons/book.svg" width="16" height="16" />
                     Study
                 </a>
             </li>
             <li>
-                <a href="Dashboard" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                <a href="Dashboard" class="nav-link text-dark">
+                    <img src="~/image/Icons/dash.svg" width="16" height="16" />
                     Dashboard
                 </a>
             </li>
         </ul>
         <hr>
         <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
                     <strong>@UserManager.GetUserName(User)</strong>
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <ul class="dropdown-menu dropdown-menu-white text-small shadow" aria-labelledby="dropdownUser1">
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><a class="dropdown-item" href="#">Profile</a></li>
             </ul>
         </div>
     </div>
-    <div class="container d-flex align-items-center justify-content-center">
-        <div class="row justify-content-center  mt-3 ms-5 text-center">
+    <div class="d-flex align-items-center justify-content-center me-3 " style="margin-left: 300px;">
+        <div class="row justify-content-center text-center bg-white rounded pt-3">
             @foreach (var task in Model.Tasks)
             {
                 if (@task.TaskId == 1)
                 {
-                    <h1 class="text-center mt-5">Unit @task.UnitId</h1>
+                    <h1 class="text-center">Unit @task.UnitId</h1>
                 }
+                if (@task.TaskId == 10)
+                {
+                    <div class="col-auto mb-5 text-center">
+                        <a href="task/@task.Id" style="pointer-events:none;" class="task-btn">
+                            <button class="btn btn-primary task-btn" disabled>Lesson @task.TaskId</button>
+                        </a>
+                    </div>
+                } else{
                 <div class="col-auto text-center">
-                    <a href="task/@task.Id">
-                        <button class="btn btn-primary">Task @task.TaskId</button>
+                    <a href="task/@task.Id" style="pointer-events:none;" class="task-btn">
+                            <button class="btn btn-primary task-btn" disabled>Lesson @task.TaskId</button>
                     </a>
                 </div>
+                }
             }
         </div>
     </div>
@@ -74,10 +83,33 @@
                 success: function (data) {
                     var tasks = data;
                     // Assign the tasks to the Razor page model
-        @Html.Raw("Model.Tasks = tasks;");
+        @Html.Raw("Model.Tasks = tasks");
+                }
+            });
+
+            $.ajax({
+                url: "/api/exp?userId=" + encodeURIComponent("@User.FindFirstValue(ClaimTypes.NameIdentifier)"),
+                type: "GET",
+                success: function (response) {
+                    var taskbtns = document.getElementsByClassName('task-btn');
+                    if (isNaN(response)){
+                        response = response || 0;
+                    };
+                    console.log((response + 100) / 100)
+                    for(i=0; i < ((response+100)/100)*2; i++){
+                        console.log(taskbtns[i]);
+                        console.log(i);
+                        taskbtns[i].style.pointerEvents = "auto";
+                        taskbtns[i+1].disabled=false;
+                    }
+                },
+                error: function () {
+                    // Handle error
                 }
             });
         });
+
+
     </script>
 }
 else

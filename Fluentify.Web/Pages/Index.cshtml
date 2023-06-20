@@ -5,64 +5,152 @@
 }
 @using Microsoft.AspNetCore.Identity
 @using Fluentify.Web.Areas.Identity.Data
-
+@using System.Security.Claims
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 @if (SignInManager.IsSignedIn(User))
 {
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark position-fixed mt-0" style="width: 280px;  height: 91%;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-dark bg-white position-fixed" style="width: 280px; height: 91%;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="~/image/Icons/menu.svg" width="40" height="32" />
             <span class="fs-4">Menu</span>
         </a>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-            <li class="nav-item">
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link text-white active" aria-current="page">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="bootstrap-icons.svg#house-door"></use></svg>
+            <li class="nav-item text-dark">
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link active" aria-current="page">
+                    <img src="~/image/Icons/house.svg" width="16" height="16" />
                     Home
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="Study" class="nav-link text-white" aria-current="page">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="bootstrap-icons.svg#house-door"></use></svg>
+            <li class="nav-item text-dark">
+                <a href="Study" class="nav-link text-dark" aria-current="page">
+                    <img src="~/image/Icons/book.svg" width="16" height="16" />
                     Study
                 </a>
             </li>
             <li>
-                <a href="Dashboard" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                <a href="Dashboard" class="nav-link text-dark">
+                    <img src="~/image/Icons/dash.svg" width="16" height="16" />
                     Dashboard
                 </a>
             </li>
         </ul>
         <hr>
         <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            <a href="#" class="d-flex align-items-center text-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                    <strong>@UserManager.GetUserName(User)</strong>
+                <strong>@UserManager.GetUserName(User)</strong>
             </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+            <ul class="dropdown-menu dropdown-menu-white text-small shadow" aria-labelledby="dropdownUser1">
                 <li><a class="dropdown-item" href="#">Settings</a></li>
                 <li><a class="dropdown-item" href="#">Profile</a></li>
             </ul>
         </div>
     </div>
+    <div id="showdata" class=" bg-white me-3 pt-5 pb-5 rounded-2" style="margin-left: 300px;">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="col-sm-6 ">
+                <div class="text-center">
+                    <img src="~/image/avatardef.png" height="250px" width="250px"/>
+                </div>
+            </div>
+            <div class="col-sm-6">
+            <ul>
+                <li>Username: @UserManager.GetUserName(User)</li>
+                <li>First Name: @UserManager.GetUserAsync(User).Result.FirstName</li>
+                <li>Last Name: @UserManager.GetUserAsync(User).Result.LastName</li>
+            </ul>
+            </div>
+        </div>
+        <div class ="d-flex align-items-center justify-content-center text-center mt-5">
+            <h1 id="lvl">Level 1</h1>
+        </div>
+        <div class="d-flex align-items-center justify-content-center text-center mt-3">
+            <div class="w3-light-grey w-50 text-center rounded-3">
+                <div id="progressb" class="w3-container w3-green w3-center rounded-3" style="width:25%">25%</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $.ajax({
+            url: "/api/exp?userId=" + encodeURIComponent("@User.FindFirstValue(ClaimTypes.NameIdentifier)"),
+            type: "GET",
+            success: function (response) {
+                var progressbar = document.getElementById('progressb');
+                var lvltxt = document.getElementById('lvl');
+                if (isNaN(response)) {
+                    response = response || 0;
+                };
+                lvltxt.innerHTML = "Level " + (Math.floor((response + 100) / 1000)+1);
+                
+                progressbar.style.width = ((response + 100) / 1000) * 100 + "%";
+                progressbar.innerHTML = ((response + 100) / 1000) * 100 + "%";
+            },
+            error: function () {
+                // Handle error
+            }
+        });
+    </script>
 }
 else
 {
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>
-        Dear students, when working on projects in a solution, it's important to make sure that all project names and namespaces are properly renamed to reflect the content of your work.
-        Please ensure that there are no example project names left in your solution.
-        To simplify this process, I recommend using the "rename solution" and global search features available in Visual Studio.
-    </p>
-        
-    <p>
-        Thank you for taking the time to ensure that your solution is properly named and organized. I wish you all the best with your coding endeavors, and happy coding!
-    </p>
-
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="row container text-center" style="width: 100%; height: 100%;">
+        <div class="col-sm-5 text-center" style="height: 100%;">
+            <div class="vertical-center text-center ms-5">
+                <img src='~/image/cartoon_earth.svg' style="height: 120%; width:120%;"/>
+            </div>
+    </div>
+        <div class="col-sm-7 text-center">
+            <div class="vertical-center text-white text-center w-50">
+                <h1>A free, fun and effective way to learn a language!</h1>
+                <div class="text-box mt-5">
+                    <a id="register" asp-area="Identity" asp-page="/Account/Register"><button id="button_reg"></button></a>
+                </div>
+                <div class="text-box mt-3">
+                    <a id="login" asp-area="Identity" asp-page="/Account/Login"><button id="button_login"></button></a>
+                </div>
+            </div>
+            
+        </div>
 </div>
+<script>
+        
+
+        $(function () {
+            $("#button_reg").click(function () {
+                $("#button_reg").addClass("onclic-reg", 250, validate);
+            });
+
+            function validate() {
+                setTimeout(function () {
+                    $("#button_reg").removeClass("onclic-reg");
+                    $("#button_reg").addClass("validate-reg", 450, callback);
+                }, 2250);
+            }
+            function callback() {
+                setTimeout(function () {
+                    $("#button_reg").removeClass("validate-reg");
+                }, 1250);
+            }
+        });
+
+        $(function () {
+            $("#button_login").click(function () {
+                $("#button_login").addClass("onclic_login", 250, validate);
+            });
+
+            function validate() {
+                setTimeout(function () {
+                    $("#button_login").removeClass("onclic_login");
+                    $("#button_login").addClass("validate-reg", 450, callback);
+                }, 2250);
+            }
+            function callback() {
+                setTimeout(function () {
+                    $("#button_login").removeClass("validate_login");
+                }, 1250);
+            }
+        });
+</script>
 }

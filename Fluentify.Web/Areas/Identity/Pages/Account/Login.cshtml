@@ -5,12 +5,12 @@
     ViewData["Title"] = "Log in";
 }
 
-<div class="mt-5 row container text-center" style="width: 100%;">
-    <div class="col-sm-3"></div>
-    <div class="col-sm-9">
+<div class="mt-5 row text-center" style="width: 100%;">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
         <section>
             <form id="account" method="post">
-                <h2>Use a local account to log in.</h2>
+                <h2 class="text-white">Use a local account to log in.</h2>
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
                 <div class="form-floating mb-3">
@@ -23,36 +23,35 @@
                     <label asp-for="Input.Password" class="form-label">Password</label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-                <div class="checkbox mb-3">
+                <div class="checkbox mb-3 text-white">
                     <label asp-for="Input.RememberMe" class="form-label">
-                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                        <input class="form-check-input text-white" asp-for="Input.RememberMe" />
                         @Html.DisplayNameFor(m => m.Input.RememberMe)
                     </label>
                 </div>
                 <div>
-                    <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                    <button id="login-submit text-white" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
                 </div>
                 <div>
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                    <p class="text-white">
+                        <a id="forgot-password"  asp-page="./ForgotPassword">Forgot your password?</a>
                     </p>
-                    <p>
+                    <p class="text-white">
                         <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                     </p>
-                    <p>
+                    <p class="text-white">
                         <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
                     </p>
                 </div>
             </form>
         </section>
     </div>
-</div>
-<div class="row mt-2 container text-center">
     <div class="col-sm-3"></div>
-    <div class="col-sm-9 col-sm-offset-9">
+</div>
+<div class="row text-center" style="width: 100%;">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4 text-center">
         <section>
-            <h3>Use another service to log in.</h3>
-            <hr />
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
@@ -79,6 +78,7 @@
             }
         </section>
     </div>
+    <div class="col-sm-3"></div>
 </div>
 
 @section Scripts {

@@ -1,1 +1,148 @@
 ﻿
+#button_reg {
+    outline: none;
+    height: 50px;
+    text-align: center;
+    width: 260px;
+    font-weight: bold;
+    border-radius: 40px;
+    background: #4baf00;
+    border: 2px solid #59ce03;
+    color: white;
+    letter-spacing: 1px;
+    text-shadow: 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    &:hover
+{
+    color: white;
+    background: #59ce03;
+}
+
+&:active {
+    letter-spacing: 2px;
+}
+
+&:after {
+    content: "REGISTER NOW";
+}
+
+}
+
+.onclic-reg {
+    width: 50px;
+    height: 50px;
+    border-color: #59ce03;
+    border-width: 3px;
+    font-size: 0;
+    border-left-color: #4baf00;
+    &:after
+
+{
+    content: "";
+}
+
+&:hover {
+    color: green;
+    background: #59ce03;
+}
+
+}
+
+.validate-reg {
+    font-size: 13px;
+    color: white;
+    background: green;
+    &:after
+
+{
+    font-family: 'FontAwesome';
+    content: "\f00c";
+}
+
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+#button_login {
+    outline: none;
+    height: 50px;
+    text-align: center;
+    width: 260px;
+    font-weight: bold;
+    border-radius: 40px;
+    background: #235390;
+    border: 2px solid #042c60;
+    color: white;
+    letter-spacing: 1px;
+    text-shadow: 0;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    &:hover
+
+{
+    color: white;
+    background: #042c60;
+}
+
+&:active {
+    letter-spacing: 2px;
+}
+
+&:after {
+    content: "LOGIN";
+}
+
+}
+
+.onclic_login {
+    width: 50px;
+    height: 50px;
+    border-color: #042c60;
+    border-width: 3px;
+    font-size: 0;
+    border-left-color: #042c60;
+    &:after
+
+{
+    content: "";
+}
+
+&:hover {
+    color: #235390;
+    background: #042c60;
+}
+
+}
+
+.validate_login {
+    font-size: 13px;
+    color: white;
+    background: #235390;
+    &:after
+
+{
+    font-family: 'FontAwesome';
+    content: "\f00c";
+}
+
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}

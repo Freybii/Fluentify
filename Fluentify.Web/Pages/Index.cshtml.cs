@@ -1,5 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Fluentify.Web.Areas.Identity.Data;
+using Fluentify.Web.Controllers;
+using Fluentify.Web.Data;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
+using Microsoft.CognitiveServices.Speech;
+using Microsoft.EntityFrameworkCore;
 
 namespace Fluentify.Web.Pages
 {
