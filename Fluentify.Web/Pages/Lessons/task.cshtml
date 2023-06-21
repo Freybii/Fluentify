@@ -33,17 +33,6 @@
 <script>
     $("#success-alert").hide();
     $("#danger-alert").hide();
-    $.ajax({
-        url: "/api/speech/synthesize",
-        type: "POST",
-        data: JSON.stringify({ text: "@Model.Task.Text" }),
-        contentType: "application/json",
-        success: function (response) {
-        },
-        error: function () {
-            // Handle error
-        }
-    });
 
     document.getElementById("check").addEventListener('click', function onClickCheck() {
         if (document.getElementById("answer").innerHTML.slice(0, -1) == "@Model.Task.CorrectWords") {
@@ -120,6 +109,8 @@
             data: JSON.stringify({ text: text }),
             contentType: "application/json",
             success: function (response) {
+                var snd = new Audio(response.audioUrl);
+                snd.play();
             },
             error: function () {
                 // Handle error
