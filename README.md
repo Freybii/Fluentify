@@ -120,7 +120,14 @@ Azure
 Application Insights
 
 
-## API Reference
+## Azure Diagram
+
+![chrome_1zVfBYVzPC](https://github.com/Freybii/Fluentify/assets/92971226/33c70f8e-8083-418a-97df-184e2984e380)
+
+## Strucuture Diagram
+
+![diagram project](https://github.com/Freybii/Fluentify/assets/92971226/972de772-14e3-4358-9c5d-2530c23023f4)
+
 
 ## Lab 3 
 What was done
